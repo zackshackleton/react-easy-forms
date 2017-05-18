@@ -1,8 +1,8 @@
 {
   "name": "react-easy-forms",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "React forms with easy implementation",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "build": "babel src --out-dir lib",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -26,13 +26,18 @@
     "url": "https://github.com/zackshackleton/react-easy-forms/issues"
   },
   "homepage": "https://github.com/zackshackleton/react-easy-forms#readme",
+  "peerDependencies": {
+    "react": "^0.14.0 || ^15.0.0",
+    "react-dom": "^0.14.0 || ^15.0.0"
+  },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "babel-preset-stage-0": "^6.24.1"
+  },
+  "dependencies": {
+    "prop-types": "^15.5.10"
   }
 }
