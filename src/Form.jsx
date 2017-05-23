@@ -1,6 +1,7 @@
 import React, { Component, cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import { classHelper } from './classHelper';
+require('./less/Form.less');
 
 class Form extends Component {
   state = {
@@ -14,10 +15,16 @@ class Form extends Component {
     event.preventDefault();
 
     let payload = [];
+    let contentCount = 0;
     let isValid = this.refs.website.value.length ? false : true;
 
     React.Children.map(this.props.children, (child, index) => {
-      let current = `input${index}`;
+      if (child.props.type === 'content') {
+        contentCount++;
+        return;
+      }
+
+      let current = `input${index - contentCount}`;
 
       let currentState = this.refs[current].validate();
       this.refs[current].removeFocus();
@@ -25,7 +32,7 @@ class Form extends Component {
       if (currentState.isValid) {
         payload.push({
           value: currentState.value,
-          name: child.props.title ? child.props.title.toLowerCase() : `${child.state.type}-input${index}`
+          name: child.props.title ? child.props.title.toLowerCase() : `${child.state.type}-input${index - contentCount}`
         });
       }
 
@@ -53,14 +60,21 @@ class Form extends Component {
   }
 
   boundChildren () {
-    return React.Children.map(this.props.children, (child, index) => {
-      child = cloneElement(child, {
-        id: `input${index}`,
-        ref: `input${index}`,
-        tabIndex: index + 1
-      });
+    let contentCount = 0;
 
-      return child;
+    return React.Children.map(this.props.children, (child, index) => {
+      if (child.props.type === 'content') {
+        contentCount++;
+        return child;
+      } else {
+        child = cloneElement(child, {
+          id: `input${index - contentCount}`,
+          ref: `input${index - contentCount}`,
+          tabIndex: index + 1 - contentCount
+        });
+
+        return child;
+      }
     });
   }
 
@@ -77,7 +91,7 @@ class Form extends Component {
         {this.boundChildren()}
         {this.state.errorMessage ? <p className="Form-error">{this.state.errorMessage}</p> : null}
         <div className="Form-buttonRow">
-          <button className={buttonClass} type="submit">{this.props.submitText}</button>
+          <button className={buttonClass} type="submit">{this.props.submitButtonText}</button>
           {this.props.secondButtonText ? <button className="Form-btn Form-btn--secondButton" type="button" onClick={this.props.secondButtonSubmit}>{this.props.secondButtonText}</button> : null}
           {this.props.thirdButtonText ? <button className="Form-btn Form-btn--thirdButton" type="button" onClick={this.props.thirdButtonSubmit}>{this.props.thirdButtonText}</button> : null}
         </div>
@@ -87,10 +101,10 @@ class Form extends Component {
 };
 
 Form.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
   secondButtonSubmit: PropTypes.func,
   secondButtonText: PropTypes.string,
-  onSubmit: PropTypes.func.isRequired,
-  submitText: PropTypes.string,
+  submitButtonText: PropTypes.string,
   subTitle: PropTypes.string,
   thirdButtonSubmit: PropTypes.func,
   thirdButtonText: PropTypes.string,
@@ -100,7 +114,7 @@ Form.propTypes = {
 Form.defaultProps = {
   secondButtonSubmit: () => { console.log("Add secondButtonSubmit prop to react-easy-forms")},
   secondButtonText: '',
-  submitText: 'Submit',
+  submitButtonText: 'Submit',
   subTitle: '',
   thirdButtonSubmit: () => { console.log("Add thirdButtonSubmit prop to react-easy-forms")},
   thirdButtonText: '',

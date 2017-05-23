@@ -8,7 +8,7 @@ class TextArea extends Component {
     error: this.props.error,
     isValid: false,
     type: 'textArea',
-    value: this.props.value || '',
+    value: this.props.value,
   }
 
   validate (value = this.state.value) {
@@ -97,7 +97,8 @@ TextArea.defaultProps = {
   subTitle: null,
   tabIndex: null,
   title: null,
-  validate: false
+  validate: false,
+  value: ''
 }
 
 export default TextArea;

@@ -7,7 +7,7 @@ class PhoneInput extends Component {
     attempted: false,
     error: this.props.error,
     isValid: false,
-    value: this.props.value || '',
+    value: this.props.value,
     type: 'phone'
   }
 
@@ -106,6 +106,7 @@ PhoneInput.defaultProps = {
   tabIndex: null,
   title: null,
   validate: true,
+  value: ''
 }
 
 export default PhoneInput;

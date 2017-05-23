@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { classHelper } from './classHelper';
+require('./less/TextInput.less');
 
 class TextInput extends Component {
   state = {

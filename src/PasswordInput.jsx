@@ -8,7 +8,7 @@ class PasswordInput extends Component {
     error: this.props.error,
     isValid: false,
     type: 'password',
-    value: this.props.value || '',
+    value: this.props.value,
   }
 
   shouldComponentUpdate (nextProps, nextState) {
@@ -105,6 +105,7 @@ PasswordInput.defaultProps = {
   tabIndex: null,
   title: null,
   validate: true,
+  value: ''
 }
 
 export default PasswordInput;
