@@ -1,17 +1,30 @@
-.Form-title {
-  margin-top: 0;
+@import('./TextInput.less');
+
+.Form {
+  height: 100%;
+  width: 100%;
 }
 
-.Form-buttons {
-  .btn {
-    margin-right: 1rem;
-  }
+.Form-title {
+  margin-top: 0;
+  display: inline-block;
+}
 
-  padding-top: 3rem;
-  width: 100%;
+.Form-subTitle {
+  margin-left: 1rem;
+  display: inline-block;
+}
+
+.Form-isHidden {
+  display: none !important;
 }
 
 .Form-error {
   margin: 2rem 0 0 0;
-  color: @Red;
+  color: tomato;
+}
+
+.Form-buttonRow {
+  padding-top: 3rem;
+  width: 100%;
 }

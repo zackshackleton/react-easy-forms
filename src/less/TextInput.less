@@ -15,14 +15,21 @@
   display: inline-block;
 }
 
-.TextInput-forgot {
-  color: @Red;
-  cursor: pointer;
-  float: right;
-  font-size: 14px;
-  margin: 20px 0 1rem 0;
-}
-
 .TextInput-field--noTitle {
   margin-bottom: 1rem;
+}
+
+.TextInput-field, {
+  border: 1px solid #DADADA;
+  background: #ECECEC;
+  box-shadow: none;
+  font-size: 16px;
+  font-weight: normal;
+  outline: none;
+  padding: 10px 15px;
+}
+
+.TextInput-field--isError {
+  border: 1px solid tomato;
+  color: tomato
 }
