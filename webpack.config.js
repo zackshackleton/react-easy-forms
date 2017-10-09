@@ -8,15 +8,15 @@ module.exports = {
   entry: ENTRY,
   output: {
     path: OUTPUT,
-    filename: 'index.js'
+    filename: 'index.js',
+    libraryTarget: 'commonjs2'
   },
   devtool: 'source-map',
   resolve: {
     extensions: [".js", ".jsx"]
   },
   externals: {
-    'react': 'react',
-    'react-dom': 'react-dom'
+    'react': 'commonjs react'
   },
   module: {
     rules: [

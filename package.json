@@ -1,6 +1,6 @@
 {
   "name": "react-easy-forms",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "React forms with easy implementation",
   "main": "lib/index.js",
   "scripts": {
@@ -27,8 +27,7 @@
   },
   "homepage": "https://github.com/zackshackleton/react-easy-forms#readme",
   "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.0",
-    "react-dom": "^0.14.0 || ^15.0.0"
+    "react": "^0.14.0 || ^15.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",
@@ -42,6 +41,7 @@
     "less": "^2.7.2",
     "less-loader": "^4.0.3",
     "postcss-loader": "^2.0.5",
+    "react-dom": "^0.14.0 || ^15.0.0",
     "style-loader": "^0.17.0",
     "webpack": "^2.5.1"
   },

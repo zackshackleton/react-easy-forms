@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { classHelper } from './classHelper';
-require('./less/TextInput.less');
 
 class TextInput extends Component {
   state = {
@@ -57,9 +56,9 @@ class TextInput extends Component {
   }
 
   inputProps () {
-    const textClass = classHelper('TextInput-field', [
-      ['TextInput-field--noTitle', !this.props.title],
-      ['TextInput-field--isError', this.state.error || (!this.state.isValid && this.state.attempted)]
+    const textClass = classHelper('refInput-field', [
+      ['refInput-field--noTitle', !this.props.title],
+      ['refInput-field--isError', this.state.error || (!this.state.isValid && this.state.attempted)]
     ]);
 
     return {
@@ -77,9 +76,9 @@ class TextInput extends Component {
 
   render () {
     return (
-      <div className="TextInput">
-        {this.props.title && <label className="TextInput-title" htmlFor={this.props.id}>{this.props.title}</label>}
-        {this.props.subTitle && <p className="TextInput-subTitle">{this.props.subTitle}</p>}
+      <div className={`TextInput refInput ${this.props.className}`}>
+        {this.props.title && <label className="refInput-title" htmlFor={this.props.id}>{this.props.title}</label>}
+        {this.props.subTitle && <p className="refInput-subTitle">{this.props.subTitle}</p>}
         <input {...this.inputProps()} />
       </div>
     );
@@ -87,10 +86,10 @@ class TextInput extends Component {
 }
 
 TextInput.propTypes = {
+  className: PropTypes.string,
   disabled: PropTypes.bool,
   error: PropTypes.bool,
   placeholder: PropTypes.string,
-
   subTitle: PropTypes.string,
   tabIndex: PropTypes.number,
   title: PropTypes.string,
@@ -99,6 +98,7 @@ TextInput.propTypes = {
 }
 
 TextInput.defaultProps = {
+  className: null,
   disabled: false,
   error: false,
   placeholder: '',
@@ -106,7 +106,7 @@ TextInput.defaultProps = {
   subTitle: null,
   tabIndex: null,
   title: null,
-  validate: true,
+  validate: false,
   value: '',
 }
 

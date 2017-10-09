@@ -1,28 +1,203 @@
-.Form {
+.refForm {
   height: 100%;
   width: 100%;
+  font-family: inherit;
+
+  *, *:before, *:after {
+    box-sizing: border-box;
+  }
 }
 
-.Form-title {
-  margin-top: 0;
+.refForm-title {
   display: inline-block;
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
 }
 
-.Form-subTitle {
-  margin-left: 1rem;
+.refForm-subTitle {
   display: inline-block;
+  margin: 0 0 0 1rem;
+  font-size: 16px;
+  font-weight: bold;
 }
 
-.Form-isHidden {
+.refForm-isHidden {
   display: none !important;
 }
 
-.Form-error {
+.refForm-error {
   margin: 2rem 0 0 0;
   color: tomato;
 }
 
-.Form-buttonRow {
+.refForm-btn {
+  border: 1px solid #09BC8A;
+  border-radius: 2px;
+  font-size: 16px;
+  padding: 10px 15px;
+  background: #09BC8A;
+  color: #fff;
+  cursor: pointer;
+  margin-right: 1rem;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.refForm-btn--secondButton {
+  border: 1px solid #D62246;
+  background: transparent;
+  color: #D62246;
+}
+
+.refForm-btn--thirdButton {
+  border: 1px solid #05668D;
+  background: transparent;
+  color: #05668D;
+}
+
+.refForm-buttonRow {
   padding-top: 3rem;
   width: 100%;
+}
+
+.refInput-title {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.refInput-subTitle {
+  font-size: 14px;
+  display: inline-block;
+  margin: 1.5rem 0 0.5rem 1rem;
+}
+
+.refInput-field--noTitle {
+  margin-top: 1.5rem;
+}
+
+.refInput-field, {
+  background: #ECECEC;
+  border: 1px solid #DADADA;
+  box-shadow: none;
+  display: block;
+  font-size: 16px;
+  font-weight: normal;
+  outline: none;
+  padding: 10px 15px;
+  transition: all 200ms ease-in-out;
+  width: 100%;
+}
+
+.TextArea {
+  .refInput-field {
+    resize: none;
+  }
+}
+
+.refInput-field--isError {
+  border: 1px solid tomato;
+  color: tomato
+}
+
+.refInput-group {
+  display: block;
+  width: 100%;
+}
+
+.refGroup-item {
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+
+.refGroup-item-inline {
+  display: inline-block;
+  margin-right: 1.5rem;
+}
+
+.refGroup-label {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: normal;
+  margin: 0;
+  vertical-align: middle;
+}
+
+.refGroup-radioInput {
+  background: #ECECEC;
+  border: 1px solid #DADADA;
+  border-radius: 50%;
+  display: inline-block;
+  height: 20px;
+  margin-right: .75rem;
+  position: relative;
+  vertical-align: middle;
+  width: 20px;
+
+  &:before {
+    content: '';
+    border-radius: 50%;
+    background: black;
+    display: none;
+    height: 50%;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+  }
+}
+
+.refGroup-radioInput--isActive {
+  &:before {
+    display: block;
+  }
+}
+
+.refGroup-checkInput {
+  background: #ECECEC;
+  border: 1px solid #DADADA;
+  display: inline-block;
+  height: 20px;
+  margin-right: .75rem;
+  position: relative;
+  vertical-align: middle;
+  width: 20px;
+
+  .icon {
+    display: none;
+    fill: black;
+    height: auto;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+  }
+}
+
+.refGroup-checkInput--isActive {
+  .icon {
+    display: block;
+  }
+}
+
+.refGroup-item--error {
+  .refGroup-radioInput {
+    border: 1px solid tomato;
+  }
+
+  .refGroup-checkInput {
+    border: 1px solid tomato;
+  }
+
+  .refGroup-label {
+    color: tomato !important;
+  }
 }

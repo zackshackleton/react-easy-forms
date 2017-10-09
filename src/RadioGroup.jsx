@@ -7,7 +7,7 @@ class RadioGroup extends Component {
     attempted: false,
     error: this.props.error,
     isValid: false,
-    value: this.props.value || null,
+    value: this.props.value,
     type: 'radio'
   }
 
@@ -31,19 +31,19 @@ class RadioGroup extends Component {
     }
   }
 
-  _onChange = (event) => {
+  _onChange = (value) => {
     if (this.state.isValid) {
       this.setState({ isValid: false })
     }
 
     if (this.props.onChange) {
-      this.props.onChange(event.target.value);
+      this.props.onChange(value);
     }
 
-    this.setState({ value: event.target.value });
+    this.setState({ value: value });
 
     if (this.state.attempted) {
-      this.validate(event.target.value)
+      this.validate(value)
     }
   }
 
@@ -52,33 +52,37 @@ class RadioGroup extends Component {
   }
 
   renderRadios () {
-    const groupClass = classHelper('RadioGroup-group', [
-      ['RadioGroup-group--inline', this.props.inline],
-      ['RadioGroup-group--error', this.state.error || (!this.state.isValid && this.state.attempted)]
+    const groupClass = classHelper('refGroup-item', [
+      ['refGroup-item--inline', this.props.inline],
+      ['refGroup-item--error', this.state.error || (!this.state.isValid && this.state.attempted)]
     ]);
 
-    const groupName = this.props.name ? this.props.name : this.props.labels.join();
+    return this.props.data.map((item, index) => {
+      const boxClass = classHelper('refGroup-radioInput', [
+        ['refGroup-radioInput--isActive', this.state.value === item.code]
+      ])
 
-    return this.props.labels.map((label, index) => {
       return (
-        <div className={groupClass} key={index}>
-          <input className="RadioGroup-radioInput" id={`${label}-${index}`} name={groupName} onChange={this._onChange} type="radio" value={label} />
-          <label className="RadioGroup-radioLabel" htmlFor={`${label}-${index}`}>{label}</label>
+        <div className={groupClass} key={index} onClick={() => this._onChange(item.code)}>
+          <div className={boxClass} />
+          <label className="refGroup-label">{item.label}</label>
         </div>
       )
     });
   }
 
   render () {
-    const newRadioClass = classHelper('RadioGroup', [
-      ['RadioGroup--noTitle', !this.props.title]
+    const newRadioClass = classHelper(`RadioGroup refInput ${this.props.className}`, [
+      ['refInput-field--noTitle', !this.props.title]
     ]);
 
     return (
       <div className={newRadioClass} ref="radioGroup">
-        {this.props.title ? <label className="RadioGroup-title">{this.props.title}</label> : null}
-        {this.props.subTitle ? <p className="RadioGroup-subTitle">{this.props.subTitle}</p> : null}
-        {this.renderRadios()}
+        {this.props.title ? <label className="refInput-title">{this.props.title}</label> : null}
+        {this.props.subTitle ? <p className="refInput-subTitle">{this.props.subTitle}</p> : null}
+        <div className="refInput-group">
+          {this.renderRadios()}
+        </div>
       </div>
     )
   }
@@ -87,9 +91,10 @@ class RadioGroup extends Component {
 export default RadioGroup;
 
 RadioGroup.propTypes = {
+  className: PropTypes.string,
   error: PropTypes.bool,
   inline: PropTypes.bool,
-  labels: PropTypes.array.isRequired,
+  data: PropTypes.array.isRequired,
   name: PropTypes.string,
   onChange: PropTypes.func,
   subTitle: PropTypes.string,
@@ -100,11 +105,13 @@ RadioGroup.propTypes = {
 };
 
 RadioGroup.defaultProps = {
+  className: null,
   error: false,
-  inline: true,
+  inline: false,
   name: null,
   subTitle: null,
   tabIndex: null,
   title: null,
-  validate: true,
+  validate: false,
+  value: null
 };

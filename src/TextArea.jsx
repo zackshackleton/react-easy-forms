@@ -48,9 +48,9 @@ class TextArea extends Component {
   }
 
   inputProps () {
-    const textFieldClass = classHelper('TextArea-field', [
-      ['TextArea-field--noTitle', !this.props.title],
-      ['isError', this.state.error || (!this.state.isValid && this.state.attempted)]
+    const textFieldClass = classHelper('refInput-field', [
+      ['refInput-field--noTitle', !this.props.title],
+      ['refInput-field--isError', this.state.error || (!this.state.isValid && this.state.attempted)]
     ]);
 
     return {
@@ -68,9 +68,9 @@ class TextArea extends Component {
 
   render () {
     return (
-      <div className="TextArea">
-        {this.props.title ? <label className="TextArea-title" htmlFor={this.props.id}>{this.props.title}</label> : null}
-        {this.props.subTitle ? <p className="TextArea-subTitle">{this.props.subTitle}</p> : null}
+      <div className={`TextArea refInput ${this.props.className}`}>
+        {this.props.title ? <label className="refInput-title" htmlFor={this.props.id}>{this.props.title}</label> : null}
+        {this.props.subTitle ? <p className="refInput-subTitle">{this.props.subTitle}</p> : null}
         <textarea {...this.inputProps()} />
       </div>
     );
@@ -78,6 +78,7 @@ class TextArea extends Component {
 }
 
 TextArea.propTypes = {
+  className: PropTypes.string,
   disabled: PropTypes.bool,
   error: PropTypes.bool,
   placeholder: PropTypes.string,
@@ -89,6 +90,7 @@ TextArea.propTypes = {
 }
 
 TextArea.defaultProps = {
+  className: null,
   disabled: false,
   error: false,
   placeholder: '',

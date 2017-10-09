@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { classHelper } from './classHelper';
+import Check from './Check';
 
 class CheckGroup extends Component {
   state = {
@@ -39,7 +40,7 @@ class CheckGroup extends Component {
     }
   }
 
-  _onChange = (event) => {
+  _onChange = (changedIndex) => {
     if (this.state.isValid) {
       this.setState({ isValid: false })
     }
@@ -48,7 +49,7 @@ class CheckGroup extends Component {
     let checks = this.state.checks;
 
     checks.map((check, index) => {
-      if (check.label === event.target.value) {
+      if (index === changedIndex) {
         if (!check.value) isValid = true;
         check.value = !check.value;
       } else if (check.value === true) {
@@ -63,42 +64,46 @@ class CheckGroup extends Component {
     this.setState({ checks: checks });
 
     if (this.state.attempted) {
-      this.setState({ isValid: isValid });
+      this.validate();
     }
   }
 
   removeFocus () {
-    this.refs.CheckGroup.blur();
+    this.refs.checkGroup.blur();
   }
 
   renderChecks () {
-    const groupClass = classHelper('CheckGroup-group', [
-      ['CheckGroup-group--inline', this.props.inline],
-      ['CheckGroup-group--error', this.state.error || (!this.state.isValid && this.state.attempted)]
+    const groupClass = classHelper('refGroup-item', [
+      ['refGroup-item--inline', this.props.inline],
+      ['refGroup-item--error', this.state.error || (!this.state.isValid && this.state.attempted)]
     ]);
 
-    const groupName = this.props.name ? this.props.name : this.state.checks[0] + this.state.checks[this.state.checks.length - 1];
-
     return this.state.checks.map((data, index) => {
+      const boxClass = classHelper('refGroup-checkInput', [
+        ['refGroup-checkInput--isActive', data.value]
+      ])
+
       return (
-        <div className={groupClass} key={index}>
-          <input className="CheckGroup-checkboxInput" id={`${data.label}-${index}`} name={groupName} onChange={this._onChange} type="checkbox" checked={data.value} value={data.label} />
-          <label className="CheckGroup-checkboxLabel" htmlFor={`${data.label}-${index}`}>{data.label}</label>
+        <div className={groupClass} key={index} onClick={() => this._onChange(index)}>
+          <div className={boxClass}><Check /></div>
+          <label className="refGroup-label">{data.label}</label>
         </div>
       )
     });
   }
 
   render () {
-    const newCheckClass = classHelper('CheckGroup', [
-      ['CheckGroup--noTitle', !this.props.title]
+    const newCheckClass = classHelper(`CheckGroup refInput ${this.props.className}`, [
+      ['refInput-field--noTitle', !this.props.title]
     ]);
 
     return (
-      <div className={newCheckClass} ref="CheckGroup">
-        {this.props.title ? <label className="CheckGroup-title">{this.props.title}</label> : null}
-        {this.props.subTitle ? <p className="CheckGroup-subTitle">{this.props.subTitle}</p> : null}
-        {this.renderChecks()}
+      <div className={newCheckClass} ref="checkGroup">
+        {this.props.title ? <label className="refInput-title">{this.props.title}</label> : null}
+        {this.props.subTitle ? <p className="refInput-subTitle">{this.props.subTitle}</p> : null}
+        <div className="refInput-group">
+          {this.renderChecks()}
+        </div>
       </div>
     )
   }
@@ -107,6 +112,7 @@ class CheckGroup extends Component {
 export default CheckGroup;
 
 CheckGroup.propTypes = {
+  className: PropTypes.string,
   data: PropTypes.array.isRequired,
   error: PropTypes.bool,
   inline: PropTypes.bool,
@@ -119,11 +125,12 @@ CheckGroup.propTypes = {
 };
 
 CheckGroup.defaultProps = {
+  className: null,
   error: false,
-  inline: true,
+  inline: false,
   name: null,
   subTitle: null,
   tabIndex: null,
   title: null,
-  validate: true,
+  validate: false,
 };

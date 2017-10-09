@@ -56,9 +56,9 @@ class PasswordInput extends Component {
   }
 
   inputProps () {
-    const textClass = classHelper('TextInput-field', [
-      ['TextInput-field--noTitle', !this.props.title],
-      ['TextInput-field--isError', this.state.error || (!this.state.isValid && this.state.attempted)]
+    const textClass = classHelper('refInput-field', [
+      ['refInput-field--noTitle', !this.props.title],
+      ['refInput-field--isError', this.state.error || (!this.state.isValid && this.state.attempted)]
     ]);
 
     return {
@@ -76,9 +76,9 @@ class PasswordInput extends Component {
 
   render () {
     return (
-      <div className="TextInput">
-        {this.props.title ? <label className="TextInput-title" htmlFor={this.props.id}>{this.props.title}</label> : null}
-        {this.props.subTitle ? <p className="TextInput-subTitle">{this.props.subTitle}</p> : null}
+      <div className={`PasswordInput refInput ${this.props.className}`}>
+        {this.props.title ? <label className="refInput-title" htmlFor={this.props.id}>{this.props.title}</label> : null}
+        {this.props.subTitle ? <p className="refInput-subTitle">{this.props.subTitle}</p> : null}
         <input {...this.inputProps()} />
       </div>
     );
@@ -86,6 +86,7 @@ class PasswordInput extends Component {
 }
 
 PasswordInput.propTypes = {
+  className: PropTypes.string,
   disabled: PropTypes.bool,
   error: PropTypes.bool,
   placeholder: PropTypes.string,
@@ -97,6 +98,7 @@ PasswordInput.propTypes = {
 }
 
 PasswordInput.defaultProps = {
+  className: null,
   disabled: false,
   error: false,
   placeholder: '',
@@ -104,7 +106,7 @@ PasswordInput.defaultProps = {
   subTitle: null,
   tabIndex: null,
   title: null,
-  validate: true,
+  validate: false,
   value: ''
 }
 

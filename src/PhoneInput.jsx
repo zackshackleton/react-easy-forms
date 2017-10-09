@@ -56,9 +56,9 @@ class PhoneInput extends Component {
   }
 
   inputProps () {
-    const textClass = classHelper('TextInput-field', [
-      ['TextInput-field--noTitle', !this.props.title],
-      ['TextInput-field--isError', this.state.error || (!this.state.isValid && this.state.attempted)]
+    const textClass = classHelper('refInput-field', [
+      ['refInput-field--noTitle', !this.props.title],
+      ['refInput-field--isError', this.state.error || (!this.state.isValid && this.state.attempted)]
     ]);
 
     return {
@@ -76,9 +76,9 @@ class PhoneInput extends Component {
 
   render () {
     return (
-      <div className="TextInput">
-        {this.props.title ? <label className="TextInput-title" htmlFor={this.props.id}>{this.props.title}</label> : null}
-        {this.props.subTitle ? <p className="TextInput-subTitle">{this.props.subTitle}</p> : null}
+      <div className={`PhoneInput refInput ${this.props.className}`}>
+        {this.props.title ? <label className="refInput-title" htmlFor={this.props.id}>{this.props.title}</label> : null}
+        {this.props.subTitle ? <p className="refInput-subTitle">{this.props.subTitle}</p> : null}
         <input {...this.inputProps()} />
       </div>
     );
@@ -86,10 +86,10 @@ class PhoneInput extends Component {
 }
 
 PhoneInput.propTypes = {
+  className: PropTypes.string,
   disabled: PropTypes.bool,
   error: PropTypes.bool,
   placeholder: PropTypes.string,
-
   subTitle: PropTypes.string,
   tabIndex: PropTypes.number,
   title: PropTypes.string,
@@ -98,6 +98,7 @@ PhoneInput.propTypes = {
 }
 
 PhoneInput.defaultProps = {
+  className: null,
   disabled: false,
   error: false,
   placeholder: '',
@@ -105,7 +106,7 @@ PhoneInput.defaultProps = {
   subTitle: null,
   tabIndex: null,
   title: null,
-  validate: true,
+  validate: false,
   value: ''
 }
 
