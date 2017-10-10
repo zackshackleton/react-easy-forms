@@ -93,7 +93,7 @@ class CheckGroup extends Component {
   }
 
   render () {
-    const newCheckClass = classHelper(`CheckGroup refInput ${this.props.className}`, [
+    const newCheckClass = classHelper(`CheckGroup refInput ${this.props.className ? this.props.className : ''}`, [
       ['refInput-field--noTitle', !this.props.title]
     ]);
 
@@ -128,7 +128,6 @@ CheckGroup.defaultProps = {
   className: null,
   error: false,
   inline: false,
-  name: null,
   subTitle: null,
   tabIndex: null,
   title: null,

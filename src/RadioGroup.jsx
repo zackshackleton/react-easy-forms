@@ -72,7 +72,7 @@ class RadioGroup extends Component {
   }
 
   render () {
-    const newRadioClass = classHelper(`RadioGroup refInput ${this.props.className}`, [
+    const newRadioClass = classHelper(`RadioGroup refInput ${this.props.className ? this.props.className : ''}`, [
       ['refInput-field--noTitle', !this.props.title]
     ]);
 
@@ -92,10 +92,9 @@ export default RadioGroup;
 
 RadioGroup.propTypes = {
   className: PropTypes.string,
+  data: PropTypes.array.isRequired,
   error: PropTypes.bool,
   inline: PropTypes.bool,
-  data: PropTypes.array.isRequired,
-  name: PropTypes.string,
   onChange: PropTypes.func,
   subTitle: PropTypes.string,
   tabIndex: PropTypes.number,
@@ -108,7 +107,6 @@ RadioGroup.defaultProps = {
   className: null,
   error: false,
   inline: false,
-  name: null,
   subTitle: null,
   tabIndex: null,
   title: null,

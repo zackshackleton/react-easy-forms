@@ -68,7 +68,7 @@ class TextArea extends Component {
 
   render () {
     return (
-      <div className={`TextArea refInput ${this.props.className}`}>
+      <div className={`TextArea refInput ${this.props.className ? this.props.className : ''}`}>
         {this.props.title ? <label className="refInput-title" htmlFor={this.props.id}>{this.props.title}</label> : null}
         {this.props.subTitle ? <p className="refInput-subTitle">{this.props.subTitle}</p> : null}
         <textarea {...this.inputProps()} />

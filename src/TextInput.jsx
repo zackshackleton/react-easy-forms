@@ -76,7 +76,7 @@ class TextInput extends Component {
 
   render () {
     return (
-      <div className={`TextInput refInput ${this.props.className}`}>
+      <div className={`TextInput refInput ${this.props.className ? this.props.className : ''}`}>
         {this.props.title && <label className="refInput-title" htmlFor={this.props.id}>{this.props.title}</label>}
         {this.props.subTitle && <p className="refInput-subTitle">{this.props.subTitle}</p>}
         <input {...this.inputProps()} />

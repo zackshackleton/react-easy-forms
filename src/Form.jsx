@@ -84,7 +84,7 @@ class Form extends Component {
     ]);
 
     return (
-      <form className={`refForm ${this.props.className}`} onSubmit={this.submitForm}>
+      <form className={`refForm ${this.props.className ? this.props.className : ''}`} onSubmit={this.submitForm}>
         {this.props.title ? <div className="refForm-title">{this.props.title}</div> : null}
         {this.props.subTitle ? <div className="refForm-subTitle">{this.props.subTitle}</div> : null}
         <input type="text" className="refForm-isHidden" name="website" ref="website" defaultValue="" />

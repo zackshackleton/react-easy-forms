@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class FormContent extends Component {
   render () {
     return (
-      <div className="FormContent">
+      <div className={`refContent ${this.props.className ? this.props.className : ''}`}>
         {this.props.children}
       </div>
     )
@@ -11,6 +11,7 @@ class FormContent extends Component {
 }
 
 FormContent.defaultProps = {
+  className: null,
   type: 'content'
 }
 
